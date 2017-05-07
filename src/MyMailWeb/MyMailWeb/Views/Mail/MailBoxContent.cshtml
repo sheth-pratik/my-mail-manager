@@ -1,0 +1,25 @@
+﻿@model IMAPMailCommunicator.Model.MailBoxWrapper
+
+@{
+    int totalCount = Model.MailBoxInfo.Messages;
+}
+<div class="tab-pane fade in" id="mailbox-@Model.Index">
+    <div>
+        <div class="col-md-10 text-left">
+            <h4>@Model.MailBoxInfo.Messages mail(s) in <b>"@Model.MailBoxInfo.Name"</b></h4>
+        </div>
+        <div class="col-md-2 text-right">
+            <a class="btn btn-default" href="#" onclick="javascript: Mail.composeNewMail();"><i class="fa fa-envelope"></i> Compose</a>&nbsp;
+        </div>
+    </div>
+    <br />
+    <div class="col-md-12 text-center">
+        <hr />
+    </div>
+    <div id="mailListContainer-@Model.Index">
+        Please wait while we fetch mail list of "@Model.Name" for you.
+    </div>
+</div>
+<script type="text/javascript">
+</script>
+

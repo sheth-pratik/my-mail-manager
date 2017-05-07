@@ -1,0 +1,43 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+@if (string.IsNullOrEmpty(MyMailWeb.Infrastructure.CurrentSession.UserId))
+{
+    <h4>
+        Hi, Welcome to My Web Mail.<br />
+    </h4>
+    <h5>
+        It looks like you are not logged in.<br />
+        If you are existing user, <a class="btn-link btn-lg" href="@Url.Action("Login","Account")"><i class="fa fa-sign-in"></i> Login</a><br />
+        If you are new user, <a class="btn-link btn-lg" href="@Url.Action("Register","Account")"><i class="fa fa-pencil"></i> Register</a>.
+    </h5>
+}
+else if (!MyMailWeb.Infrastructure.CurrentSession.MailConfiurationId.HasValue)
+{
+    <h4>
+        Hi, Welcome to My Web Mail.<br />
+    </h4>
+    <h5>
+        It looks like you have not configured your mail account. <a class="btn-link btn-lg" href="@Url.Action("Index","Manage")"><i class="fa fa-sliders"></i> Manage</a>.
+    </h5>
+}
+else
+{
+    <div class="row" id="mainMailContainer">
+        Please wait while we verify your mail box details.
+    </div>
+}
+@section Scripts {
+    @Scripts.Render("~/Scripts/Mail/Mail.js")
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+<script type="text/javascript">
+    var mailContainerUrl = "@Url.Action("MailContainer", "Mail")";
+    var mailBoxContentUrl = "@Url.Action("MailBoxContent", "Mail")";
+    var mailListUrl = "@Url.Action("MailList", "Mail")";
+    var messageContentUrl = "@Url.Action("MessageContent", "Mail")";
+    var messageComposeUrl = "@Url.Action("MessageCompose", "Mail")";
+    var deleteSelectedMessegesUrl = "@Url.Action("DeleteSelectedMesseges", "Mail")";
+</script>

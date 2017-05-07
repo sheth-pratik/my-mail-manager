@@ -1,0 +1,25 @@
+﻿@model IMAPMailCommunicator.Model.MailClientWrapper
+
+@if (Model != null && Model.IsConnected)
+{
+    <div class="tabbable tabs-left">
+        @Html.Partial("MailBoxTabs", Model)
+    </div>
+}
+else
+{
+    string message = "";
+        
+    if (Model == null || string.IsNullOrEmpty(Model.ErrorMessage))
+    {
+        message = "Unknown error occured whiel connecting to Mail server. Please Verify Configuration.";
+    }
+    else
+    {
+        message = "Can not connect to mail server due to error. \"" + Model.ErrorMessage + "\"";
+    }
+    <h3>Can not connect to server</h3>
+    <script>
+        CommonUtilities.showToast(CommonUtilities.TOAST_TYPE.DANGER, "Error", "@message", true);
+    </script>
+}

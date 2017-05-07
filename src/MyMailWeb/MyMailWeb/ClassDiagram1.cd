@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="MyMailWeb.Controllers.HomeController" Collapsed="true">
+    <Position X="4.25" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAACCAAEACAAAAAAAAAAAAAAAAAEAAAAAAAA=</HashCode>
+      <FileName>Controllers\HomeController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MyMailWeb.Controllers.MailController">
+    <Position X="1.5" Y="2" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAABAAAAAAQACAAIAAAAAAAAAABAAAEAAAAAAAA=</HashCode>
+      <FileName>Controllers\MailController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MyMailWeb.Controllers.ManageController" Collapsed="true">
+    <Position X="4.25" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAABACA0iAAgAACAEFhAAAgAAEAIMIAAEEEiAAkAAA=</HashCode>
+      <FileName>Controllers\ManageController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MyMailWeb.Controllers.AccountController" Collapsed="true">
+    <Position X="4.25" Y="1.75" Width="1.5" />
+    <NestedTypes>
+      <Class Name="MyMailWeb.Controllers.AccountController.ChallengeResult" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Controllers\AccountController.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAABAChACAAAAAAAAFgEgAABAABMKIAAAMRAAQgAAA=</HashCode>
+      <FileName>Controllers\AccountController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MyMailWeb.Models.MessageComposeModel">
+    <Position X="4" Y="5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAQAAAAAAAAAAAAIABAAAAAAAAAAAAAAAAAIAAAAA=</HashCode>
+      <FileName>Models\MessageComposeModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MyMailWeb.Models.ManageMailConfigurationModel">
+    <Position X="1.25" Y="5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAQACAAQAAgAAABwAAAAAAAAAAAAEAA=</HashCode>
+      <FileName>Models\ManageMailConfigurationModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

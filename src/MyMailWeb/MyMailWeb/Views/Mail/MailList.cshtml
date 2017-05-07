@@ -1,0 +1,80 @@
+﻿@model IMAPMailCommunicator.Model.MailMessageListModel
+
+@if (Model != null)
+{
+    <div class="text-center col-md-12">
+        <div class="text-left col-md-6">
+            <div id="dvMessageListOperation" style="">
+                <div class="dropdown">
+                    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
+                        Select Options
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                        <li role="presentation"><a class="" href="#" onclick="javascript:return Mail.deleteSelectedMails(@Model.Index);"><i class="fa fa-trash"></i> Delete</a></li>
+                        <li role="presentation" class="disabled"><a title="Not implemented yet" href="#" onclick=""><i class="fa fa-mail-forward"></i> Forward</a></li>
+                        <li role="presentation" class="disabled"><a title="Not implemented yet" href="#" onclick=""><i class="fa fa-mail-reply"></i> Reply</a></li>
+                        <li role="presentation" class="disabled"><a title="Not implemented yet" href="#" onclick=""><i class="fa fa-mail-reply-all"></i> Reply All</a></li>
+                    </ul>
+                </div>
+            </div>&nbsp;
+        </div>
+        <div class="text-right col-md-6">
+            @Html.Partial("MailListPagination", Model)
+        </div>
+    </div>
+    <div id="mailList-@Model.Index">
+        @if (@Model.TotalRecords > 0)
+        {
+            <table class="table table-hover" id="tblMessageList">
+                <thead>
+                    <tr>
+                        <th>
+                            @*@Html.CheckBox("chkSelectAll", false, new { @onclick = "javascript:Mail.selectAllClicked();" })*@
+                        </th>
+                        <th>
+                            Subject
+                        </th>
+                        <th>
+                            Time
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (int i = 0; i < Model.MailMessageList.Count; i++)
+                    {
+                        var mailMessage = Model.MailMessageList[i];
+                        <tr>
+                            <td>
+                                @Html.CheckBox("chkSelect-" + mailMessage.Uid, false, new { @onclick = "javascript:Mail.selectMessageClicked();", @uid = mailMessage.Uid })
+                            </td>
+                            <td>
+                                @{
+                        string subject = mailMessage.MailMessage.Subject;
+                        if (mailMessage.IsMessageNotRead)
+                        {
+                            subject = "<b>" + subject + "</b>";
+                        }
+                        <a href="#" onclick="javascript:Mail.loadMessage(@Model.Index, @mailMessage.Uid);"> @Html.Raw(subject) </a>
+                                }
+                            </td>
+                            <td>@mailMessage.DateString</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+        else
+        {
+
+        }
+    </div>
+}
+else
+{
+    <div class="alert alert-danger">
+            It looks like there is some problem with connectivity. Please verify your internet connection or Please refresh page or logout/login in again.
+    </div>
+
+}
+

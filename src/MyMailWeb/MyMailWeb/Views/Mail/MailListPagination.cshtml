@@ -1,0 +1,40 @@
+﻿@model IMAPMailCommunicator.Model.MailMessageListModel
+
+<nav>
+    @if (Model.PageList.Count > 0)
+    {
+        <ul class="pagination" style="margin-bottom: 5px; margin-top:5px;">
+            @{
+        string style = Model.CurrentPage == 0 ? "class=\"disabled\"" : string.Empty;
+            }
+            <li @Html.Raw(style)>
+                <a href="#" aria-label="Previous" onclick="javascript:Mail.loadMailList(@Model.Index, 0);">
+                    <span aria-hidden="true"><i class="fa fa-fast-backward"></i></span>
+                </a>
+            </li>
+            <li @Html.Raw(style)>
+                <a href="#" aria-label="Previous" onclick="javascript:Mail.loadMailList(@Model.Index, @Model.CurrentPage - 1);">
+                    <span aria-hidden="true"><i class="fa fa-backward"></i></span>
+                </a>
+            </li>
+            @foreach (var index in Model.PageList)
+            {
+                style = index == Model.CurrentPage ? "class=\"active\"" : string.Empty;
+                <li @Html.Raw(style)><a href="#" onclick="javascript:Mail.loadMailList(@Model.Index, @index);">@(index + 1)</a></li>
+            }
+            @{
+        style = Model.CurrentPage == Model.TotalPages - 1 ? "class=\"disabled\"" : string.Empty;
+            }
+            <li @Html.Raw(style)>
+                <a href="#" aria-label="Previous" onclick="javascript:Mail.loadMailList(@Model.Index, @Model.CurrentPage + 1);">
+                    <span aria-hidden="true"><i class="fa fa-forward"></i></span>
+                </a>
+            </li>
+            <li @Html.Raw(style)>
+                <a href="#" aria-label="Next" onclick="javascript:Mail.loadMailList(@Model.Index, @Model.TotalPages - 1);">
+                    <span aria-hidden="true"><i class="fa fa-fast-forward"></i></span>
+                </a>
+            </li>
+        </ul>
+    }
+</nav>

@@ -1,0 +1,36 @@
+﻿@model IMAPMailCommunicator.Model.MailClientWrapper
+
+@if (Model != null && Model.MailBoxNameList.Count > 0)
+{
+    string defaultTabName = Model.DefaultMailBox;
+    int defaultTabIndex = Model.MailBoxList[defaultTabName].Index;
+    <ul id="mailBoxTabs" class="nav nav-tabs" style="width:20%">
+        @for (int index = 0; index < Model.MailBoxNameList.Count; index++)
+        {
+            string mailBoxName = Model.MailBoxNameList[index];
+            var mailBoxInfo = Model.MailBoxList[mailBoxName];
+            string unReadCount = mailBoxInfo.MailBoxInfo != null && mailBoxInfo.MailBoxInfo.Unread > 0 ? "<span class='badge'>" + mailBoxInfo.MailBoxInfo.Unread + "</span>" : string.Empty;
+            <li><a href="#mailbox-@index" data-toggle="tab" index="@index">@Model.MailBoxNameList[index] @Html.Raw(unReadCount)</a></li>
+        }
+    </ul>
+    <div id="mailBoxList" class="tab-content col-md-9" >
+        @for (int index = 0; index < Model.MailBoxNameList.Count; index++)
+        {
+            string mailBoxName = Model.MailBoxNameList[index];
+            var mailBoxInfo = Model.MailBoxList[mailBoxName];
+            @Html.Partial("MailBoxContent", mailBoxInfo)
+        }
+    </div>
+    <div id="messageContent" style="display:none;" class="col-md-9">
+        Please wait while we load Message for you
+    </div>
+    <div id="messageCompose" style="display:none" class="col-md-9">
+        This area to create new mails
+    </div>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('a[data-toggle="tab"]').on('shown.bs.tab', Mail.onTabLoad);
+            $('.nav-tabs a[index='+@defaultTabIndex+']').tab('show');
+        });
+    </script>
+}

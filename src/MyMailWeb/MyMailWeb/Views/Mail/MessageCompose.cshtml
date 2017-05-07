@@ -1,0 +1,62 @@
+﻿@model MyMailWeb.Models.MessageComposeModel
+<div class="col-md-12">
+    <div class="col-md-10 text-left">
+        <h4><b>Compose New Mail</b></h4>
+    </div>
+    <div class="col-md-2 text-right">
+        <a class="btn btn-default" href="#" onclick="javascript:Mail.backToMailBoxList();"><i class="fa fa-arrow-left"></i> Back</a>
+    </div>
+</div>
+<br />
+<div class="col-md-12 text-center">
+    <hr />
+</div>
+@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "messageCompose" }))
+{
+    Html.EnableClientValidation();
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.ToEmailAddress, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ToEmailAddress, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ToEmailAddress, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Subject, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Subject, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Subject, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.IsHTMLBody, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div class="checkbox">
+                    @Html.EditorFor(model => model.IsHTMLBody)
+                    @Html.ValidationMessageFor(model => model.IsHTMLBody, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Body, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Body, new { htmlAttributes = new { @class = "form-control", @style="width: 100%; max-width: 100% !important", @rows = "15"} })
+                @Html.ValidationMessageFor(model => model.Body, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <a class="btn btn-default" href="#" onclick="javascript:return Mail.sendMail();"><i class="fa fa-send"></i> Send</a>&nbsp;
+                <a class="btn btn-default" href="#" onclick="javascript: return Mail.resetMail();"><i class="fa fa-refresh"></i> Reset</a>
+            </div>
+        </div>
+    </div>
+}
